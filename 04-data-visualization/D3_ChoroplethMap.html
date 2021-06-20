@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<meta charset='UTF-8'/>
+	<title>D3: Choropleth Map</title>
+	<noscript>This project requires JavaScript to be viewed and tested</noscript>
+	
+	<!-- D3 Library scripts: stdib, format lib -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js'></script>
+	<!-- <script src='https://d3js.org/d3-time-format.v3.min.js'></script> -->
+	<!-- <script src='https://cdn.jsdelivr.net/npm/d3-format@3'></script> -->
+	<script src="https://d3js.org/topojson.v1.min.js"></script>
+	
+	<style>
+		svg {border: 2px solid #1E1803; border-radius: 10px;}
+		#description{display: flex; font-size: 8px; font-family: Monospace; justify-content: right; text-align: left; }
+		.bar:hover {fill: #FFF;}
+		#tooltip {position: absolute}
+	</style>
+</head>	
+
+<body>
+	<div class='graph'></div>
+	<script>
+		var width = document.body.clientWidth;
+		var height = window.innerHeight - 80;
+
+		margin = ({top: 60, right: 120, bottom: 60, left: 80})
+
+		var svg = d3
+			.select('.graph')
+			.append('svg')
+			.attr('width', width)
+			.attr('height', height);
+
+		d3.json('https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json', eduJSON => {
+		d3.json('https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json', topJSON => {
+
+			higherEdu = eduJSON.map((d, i) => eduJSON[i].bachelorsOrHigher);
+
+			svg.append('text')
+				.text('Higher Education in the USA')
+				.attr('id', 'title')
+				.attr('text-anchor', 'middle')
+				.attr('x', width / 2)
+				.attr('y', margin.top * (1 - 1 / 3))
+				.style('font-size', 16)
+				.style('text-decoration', 'underline');
+
+  			let colourScale = d3.scaleLinear()
+  				.domain([Math.min(...higherEdu), Math.max(...higherEdu)])
+  				.range(['#000', '#DDD']);
+			
+			let tooltip = d3
+  					.select('.graph')
+  					.append('div')
+  					.attr('id', 'tooltip')
+  					.style('visibility', 'hidden');
+  					
+			svg.append('g')
+				.selectAll('path')
+				.data(topojson.feature(topJSON, topJSON.objects.counties).features)
+				.enter()
+				.append('path')
+				.attr('class', 'county')
+				.attr('data-fips', d => d.id)
+				.attr('data-education', d => {
+					let match = eduJSON.filter(f => d.id == f.fips);
+					return match[0].bachelorsOrHigher
+				})
+				.attr('d', d3.geoPath())
+				.style('fill',d => {
+					let match = eduJSON.filter(f => d.id == f.fips);
+					return colourScale(match[0].bachelorsOrHigher)
+				})
+				.on('mouseover', (d, i) => {
+					let match = eduJSON.filter(f => d.id == f.fips);
+					tooltip.style('visibility', 'visible');
+        			tooltip.attr('data-education', match[0].bachelorsOrHigher);
+        			tooltip.html(
+        				'<strong>' + (match[0].area_name) + ', ' 
+        				+ match[0].state + '</strong>: ' 
+        				+ match[0].bachelorsOrHigher + '%'
+        		)})
+				.on('mouseout', () => {
+					tooltip.style('visibility', 'hidden');
+				});
+				
+			// Legend
+			let legend = svg.append('g').attr('id', 'legend');
+			legend.selectAll('rect')
+				.data(colourScale.ticks(15))
+				.enter()
+				.append('rect')
+				.attr('id', 'legend')
+				.attr('x', width - margin.right / 1.5)
+				.attr('y', (d, i) => height / 2 + margin.bottom * (i/1.25 - 6))
+				.attr('width', margin.bottom)
+				.attr('height', margin.bottom/1.22)
+				.style('stroke', 'black')
+				.style('fill', (d, i) => colourScale(d));
+			svg.append('text')
+				.text(
+					(Math.min(...higherEdu))
+						.toFixed(1)
+				)
+				.attr('x', width - margin.right / 2.25)
+				.attr('y', height / 2 - margin.bottom * 6 - 16)
+				.attr('text-anchor', 'middle');
+			svg.append('text')
+				.text(
+					(Math.max(...higherEdu))
+						.toFixed(1)
+				)
+				.attr('text-anchor', 'middle')
+				.attr('x', width - margin.right / 2.25)
+				.attr('y', height / 2 + margin.bottom * 6 + 30);
+			svg.append('text')
+				.attr('transform', 'rotate(-90)')
+				.attr('x', - height / 2)
+				.attr('y', width - margin.right / 1.25)
+				.attr('text-anchor', 'middle')
+				.text('Percentage of adults age 25 and older with a bachelor\'s degree or higher (2010-2014)');
+		})});
+	</script>
+	<p id='description'></p>
+</body>
+
+</html>
+
+<!-- FreeCodeCamp's test suite -->
+<script
+	id='test suite'
+	src='https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js'>
+</script>

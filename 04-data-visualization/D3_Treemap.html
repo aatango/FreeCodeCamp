@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<meta charset='UTF-8'/>
+	<title>D3: Heat Map</title>
+	<noscript>This project requires JavaScript to be viewed and tested</noscript>
+
+	<!-- D3 Library scripts: stdib, format lib -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js'></script>
+	<!-- <script src='https://d3js.org/d3-time-form at.v3.min.js'></script> -->
+	<script src='https://cdn.jsdelivr.net/npm/d3-format@3'></script>
+
+	<style>
+		svg {border: 2px solid #1E1803; border-radius: 10px;}
+		#description{display: flex; font-size: 8px; font-family: Monospace; justify-content: right; text-align: left; }
+		.bar:hover {fill: #FFF;}
+		#tooltip {position: absolute}
+		h1 {text-align: center; font-size: 16px; text-decoration: underline}
+	</style>
+</head>	
+
+<body>
+	<h1 id='title'> Highest Grossing Movies </h1>
+	<div class='graph'></div>
+	<script>
+		margin = ({top: 60, right: 120, bottom: 60, left: 80})
+		var width = document.body.clientWidth;
+		var height = window.innerHeight - 2 * margin.bottom;
+
+		var svg = d3
+			.select('.graph')
+			.append('svg')
+			.attr('width', width)
+			.attr('height', height);
+
+		d3.json('https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/movie-data.json', JSON => {
+			// Treemap setup
+			let treemap = d3.treemap()
+				.size([width, height - 2 * margin.bottom])
+				.paddingInner(1);
+			let root = d3
+				.hierarchy(JSON)
+				.sum(d => d.value)
+				.sort((a, b) => b.value - a.value);
+
+			treemap(root);
+
+			/* Tooptips - based on FreeCodeCamp's example
+				(https://codepen.io/freeCodeCamp/pen/GrZVaM)
+			.append('title').attr('id', 'tooltip').text('hello, world')
+			as shown in lessons doesn't seem to work */
+			let tooltip = d3
+					.select('.graph')
+					.append('div')
+					.attr('id', 'tooltip')
+					.style('visibility', 'hidden');
+
+			// Treemap items
+			let cell = svg
+				.selectAll('g')
+				.data(root.leaves())
+				.enter()
+				.append('g')
+				.attr('transform', d => 'translate(' + d.x0 + ',' + d.y0 + ')');
+
+			let colourScale = d3.scaleOrdinal()
+				.domain(JSON.children.map(d => d.name))
+				.range(['#000', '#222', '#444',
+						'#666', '#888', '#AAA', '#CCC']);
+
+			cell.append('rect')
+				.attr('class', 'tile')
+				.attr('width', d => d.x1 - d.x0)
+				.attr('height', d => d.y1 - d.y0)
+				.attr('data-category', d => d.data.category)
+				.attr('data-name', d => d.data.name)
+				.attr('data-value', d => d.data.value)
+				.attr('fill', d => colourScale(d.data.category))
+				.on('mouseover', (d, i) => {
+					let date = new Date(d.year, d.month);
+					tooltip.style('visibility', 'visible');
+					tooltip.attr('data-value', d.data.value)
+					tooltip.html(
+						'<strong>'
+						+ d.data.name + '</strong>(' + d.data.category + ')<br/>' + d.data.value + ' USD'
+					)})
+				.on('mouseout', () => {
+					tooltip.style('visibility', 'hidden');
+				})
+
+
+
+
+
+
+
+			// Legend
+			let legend = svg.append('g').attr('id', 'legend');
+			legend.selectAll('rect')
+				.data(colourScale)
+				.enter()
+				.append('rect')
+				.attr('id', 'legend')
+				.attr('x', width - margin.right / 1.5)
+				.attr('y', (d, i) => height + margin.bottom * (i - 6))
+				.attr('width', margin.bottom )
+				.attr('height', margin.bottom)
+				.style('stroke', 'black')
+				.style('fill', (d, i) => colourScale(i));
+			svg.append('text')
+				.text(
+					(Math.min(...variances) + JSON.baseTemperature)
+						.toFixed(1)
+				)
+				.attr('x', width - margin.right / 2.25)
+				.attr('y', height / 2 - margin.bottom * 6 - 16)
+				.attr('text-anchor', 'middle');
+			svg.append('text')
+				.text(
+					(Math.max(...variances) + JSON.baseTemperature)
+						.toFixed(1)
+				)
+				.attr('text-anchor', 'middle')
+				.attr('x', width - margin.right / 2.25)
+				.attr('y', height / 2 + margin.bottom * 6 + 30);
+			svg.append('text')
+				.attr('transform', 'rotate(-90)')
+				.attr('x', - height / 2)
+				.attr('y', width - margin.right / 1.25)
+				.attr('text-anchor', 'middle')
+				.text('Temperatures in ºC');
+			// Description
+			d3.select('p')
+				.html('Base temperatures (1753 - 2015): ' +
+					JSON.baseTemperature + 'ºC')
+		});
+
+	</script>
+	<p id='description'></p>
+</body>
+</html>
+
+<!-- FreeCodeCamp's test suite -->
+<script
+	id='test suite'
+	src='https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js'>
+</script>
