@@ -98,42 +98,46 @@
 			// Legend
 			let legend = svg.append('g').attr('id', 'legend');
 			legend.selectAll('rect')
-				.data(colourScale)
+				.data(JSON.children.map(d => d.name))
 				.enter()
 				.append('rect')
-				.attr('id', 'legend')
-				.attr('x', width - margin.right / 1.5)
-				.attr('y', (d, i) => height + margin.bottom * (i - 6))
+				.attr('class', 'legend-item')
+				.attr('x', (d, i) => width/7 * i + margin.left)
+				.attr('y', height - 1.2 * margin.bottom)
 				.attr('width', margin.bottom )
 				.attr('height', margin.bottom)
 				.style('stroke', 'black')
-				.style('fill', (d, i) => colourScale(i));
+				.style('fill', (d, i) => colourScale(d));
+
+			// Hardcoded Text, should be changed
 			svg.append('text')
-				.text(
-					(Math.min(...variances) + JSON.baseTemperature)
-						.toFixed(1)
-				)
-				.attr('x', width - margin.right / 2.25)
-				.attr('y', height / 2 - margin.bottom * 6 - 16)
-				.attr('text-anchor', 'middle');
+				.text('Action')
+				.attr('x', margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
 			svg.append('text')
-				.text(
-					(Math.max(...variances) + JSON.baseTemperature)
-						.toFixed(1)
-				)
-				.attr('text-anchor', 'middle')
-				.attr('x', width - margin.right / 2.25)
-				.attr('y', height / 2 + margin.bottom * 6 + 30);
+				.text('Drama')
+				.attr('x', width/7 * 1 + margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
 			svg.append('text')
-				.attr('transform', 'rotate(-90)')
-				.attr('x', - height / 2)
-				.attr('y', width - margin.right / 1.25)
-				.attr('text-anchor', 'middle')
-				.text('Temperatures in ºC');
-			// Description
-			d3.select('p')
-				.html('Base temperatures (1753 - 2015): ' +
-					JSON.baseTemperature + 'ºC')
+				.text('Adventure')
+				.attr('x', width/7 * 2 + margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
+			svg.append('text')
+				.text('Family')
+				.attr('x', width/7 * 3 + margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
+			svg.append('text')
+				.text('Animation')
+				.attr('x', width/7 * 4 + margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
+			svg.append('text')
+				.text('Comedy')
+				.attr('x', width/7 * 5 + margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
+			svg.append('text')
+				.text('Biography')
+				.attr('x', width/7 * 6 + margin.left)
+				.attr('y', height - 1.5 * margin.bottom);
 		});
 
 	</script>
