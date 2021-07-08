@@ -8,13 +8,15 @@ Project archive for FreeCodeCamp's (FCC) curricula.
 [FCC link](https://www.freecodecamp.org/learn/data-visualization/)
 
 ### Design decisions
-_Set internal challenge to finish full course within one month._
+Set internal challenge to finish full course within one month.
 
 To achieve a viable product within the time frame, the following was decided:
 * Aesthetic template would be maintaned across all projects. Once the design was defined in the earlier, and easier, programs, it would then be possible to alot more time to design the latter systems.
 * Anything that wasn't an explicit requirement of the user stories, would be de prioritised, and might not end up being implemented (this is how the [Tree Map project](https://aatango.github.io/FreeCodeCamp/04-data-visualization/D3_Treemap.html) ended up without leaf labels).
 
-_Once it became clear the initial deadline would not be respected, priority changed; from finishing course within a month, to maintain a consistent product between all projects. In the end, it would take about 1.5 months do finish the assignments._
+Once it became clear the initial deadline would not be respected, priority changed; from finishing course within a month, to maintain a consistent product between all projects. 
+
+_In the end, it would take about 1.5 months do finish the assignments._
 
 ### Tooltip testing problems
 Tooltip, as presented in the [course's lesson](https://www.freecodecamp.org/learn/data-visualization/data-visualization-with-d3/add-a-tooltip-to-a-d3-element), appears not to fulfill the applicable tests:
@@ -33,6 +35,10 @@ d3.select('svg')
 	.on('mouseout', () => tooltip.style('visibility', 'hidden'));
 ```
 
+# Scientific Computing with Python
+[FCC link](https://www.freecodecamp.org/learn/scientific-computing-with-python/)
+
+Course projects done through Replit.com, as requested in the course page. The files in this repo serve as a backup.
 
 # Coding Interview Prep
 [FCC link](https://www.freecodecamp.org/learn/coding-interview-prep/)
