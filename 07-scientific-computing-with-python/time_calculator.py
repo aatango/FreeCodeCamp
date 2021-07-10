@@ -1,22 +1,17 @@
 def add_time(start: str, duration: str, start_day: str = '') -> str:
-	"""
-	Adds a time to add to a starting time, and returns the elasped time, inc. days.
+	"""Calculates elapsed time, formatted by hours and days.
+
+	Adds a HH:MM formatted duration of time, to a similarly formatted start time,
+	and how many elapsed days, if any.
+	If start day is also given, will append end weekday to returning string.
 
 	ARGS
-		start: str
-			start time, HH:MM AM/PM formatted 12-hour-clock
-
-		duration: str
-			duration to measure, HH:MM formatted 24-hour-clock
-
-		start_day: str = ''
-			optional, starting day of the week
+		start		Start time, HH:MM AM/PM formatted 12-hour-clock.
+		duration	Duration to measure, HH:MM formatted 24-hour-clock.
+		start_day	Optional, starting day of the week.
 
 	RETURNS
-		end_clock: str
-			calculated time, formatted 12-hour-clock & elapsed days.
-			If start_day is given, will include ending day of the week
-			before elapsed days.
+		end_clock	Calculated time, formatted 12-hour-clock & elapsed days.
 	"""
 
 	# AM/PM evaluation
@@ -59,8 +54,8 @@ def add_time(start: str, duration: str, start_day: str = '') -> str:
 	end_time = end_time % 12
 	end_hour = 12 if int(end_time) == 0 else int(end_time)
 	end_clock = str(end_hour) + ':' \
-		+ str(int((end_time % 1) * 60)).zfill(2) + am_pm \
-		+ week_day + days_later
+	+ str(int((end_time % 1) * 60)).zfill(2) + am_pm \
+	+ week_day + days_later
 
 	return end_clock
 

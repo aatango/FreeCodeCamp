@@ -1,7 +1,7 @@
-Project archive for FreeCodeCamp's (FCC) curricula.
-
 # JavaScript Algorithms and Data Structures
 [FCC link](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/)
+
+Course projects done through FCC webpage. The files in this branch serve as backup.
 
 
 # Data Visualisation
@@ -38,7 +38,7 @@ d3.select('svg')
 # Scientific Computing with Python
 [FCC link](https://www.freecodecamp.org/learn/scientific-computing-with-python/)
 
-Course projects done through Replit.com, as requested in the course page. The files in this repo serve as a backup.
+Course projects done through Replit.com, as requested in the course page. The files in this branch serve as a backup.
 
 # Coding Interview Prep
 [FCC link](https://www.freecodecamp.org/learn/coding-interview-prep/)
