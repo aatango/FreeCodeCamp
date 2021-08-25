@@ -1,5 +1,9 @@
 class Category:
-	"""
+	"""Category is able to instantiate objects based on
+	different budget categories (like food, clothing, and entertainment).
+
+	When objects are created, they are passed in the name of the category.
+	Class has instance variable called ledger as a list.
 	"""
 
 	def __init__(self, name: str) -> None:
@@ -18,12 +22,15 @@ class Category:
 		return summary
 
 	def get_balance(self) -> int:
-		"""Returns the current balance."""
+		"""Returns the current balance based on past deposits and withdrawals."""
 
 		return self.balance
 
 	def deposit(self, sum: int, desc: str = '') -> None:
-		"""Deposits an amount into the category, with an optional description."""
+		"""Deposits an amount into the category, with an optional description.
+		
+		If no description is given, it defaults to an empty string.
+		"""
 
 		self.balance += sum
 		self.ledger.append({"amount": sum, "description": desc})
@@ -31,15 +38,20 @@ class Category:
 	def withdraw(self, sum: int, desc: str = '') -> bool:
 		"""If possible, withdraws funds from budget category.
 
-		If the current balance is too low to perform the withdrawal, nothing happens;
-		otherwise withdrawal is commited as a deposit of a negative sum.
+		Similar to deposit method, but ammount passed in is stored
+		in the ledger as a negative number.
+
+		If the current balance is too low to perform the withdrawal,
+		nothing happens; otherwise withdrawal is commited
+		 as a deposit of a negative sum.
 
 		ARGS
-			sum		amount to withdraw.
-			desc	description tag to add to ledger
+		sum		amount to withdraw.
+		desc	description tag to add to ledger
 
 		RETURNS
-			True if there were enough funds in the balance, and withdrawal was performed
+		True if there were enough funds in the balance,
+		and withdrawal was performed
 		"""
 
 		if self.balance < sum:
@@ -51,37 +63,60 @@ class Category:
 	def transfer(self, sum: int, cat: str) -> bool:
 		"""If possible, transfers funds from one budget category to another.
 
-		If the withdrawing category doesn't have enough funds for the transfer, nothing happens;
-		otherwise, withdrawal is commited to current account,
-		and a deposit of the desired budget group is ordered.
+		Accepts amount and another budget category as arguments.
+
+		Adds withdrawal with the amount and description
+		"Transfer to [Destination Budget Category].
+
+		Then adds deposit to other budget category with amount,
+		and description "Transfer from [Source Budget Category].
+
+		If there are not enough funds,nothing is to be added to either ledgers.
 
 		ARGS
-			sum amount to transfer between categories.
-			cat Category to which funds are to be transferred.
+		sum amount to transfer between categories.
+		cat Category to which funds are to be transferred.
 
 		RETURNS
-			True if there where enough funds in the balance, and transfer was performed.
+		True if there where enough funds in the balance,
+		and transfer was performed.
 		"""
 
 		if self.balance < sum:
 			return False
 		else:
-			self.ledger.append({"amount": -sum, "description": f"Transfer to {cat.name}"})
+			self.ledger.append(
+				{"amount": -sum, "description": f"Transfer to {cat.name}"}
+			)
 			self.balance -= sum
 			cat.deposit(sum, f'Transfer from {self.name}')
 			return True
 
 	def check_funds(self, sum: int) -> bool:
-		"""Checks if argument amount is smaller than the current category balance."""
+		"""Checks if argument amount is smaller than the current category balance.
+		
+		Method can be used by both the withdraw and transfer methods.
+		"""
 
 		return (False if sum > self.balance else True)
 
 
-def create_spend_chart(categories: list) -> None:
-	""" Shows percentage spent in each category.
+def create_spend_chart(categories: list) -> str:
+	"""Returns bar chart as string
+
+	Chart shows the percentage spent in each category passed in to the function.
+	Percentage spent is calculated only with withdrawals, and not with deposits.
+
+	Down the left side are labels 0 - 100.
+	The "bars" in the bar chart are made out of the "o" character.
+	The height of each bar is rounded down to the nearest 10.
+	Horizontal line below the bars goes two spaces past the final bar.
+	Each category name is written vertically below the bar,
+
+	There is a title at the top: "Percentage spent by category"
 
 	ARGS
-		categories	Items which to evaluate
+	categories	Items which to evaluate
 	"""
 
 	# Expenses inc. total

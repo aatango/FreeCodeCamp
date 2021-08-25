@@ -1,16 +1,11 @@
 def arithmetic_arranger(problems: list, solve: bool = 'False') -> str:
 	""" Rearrange add/sub operations into vertical layout.
 
-	From a properly formatted list of strings, rearranges problem vertically
-	and side by side. Prescribed function rules are enforced just before usage.
-
-	ARGS
-		problems	Array with desired operations.
-		solve		Optional toggle to solve problem,
-					as well as reformatting it.
-
-	RETURNS	
-		arranged_problems	Formatted acc. to project requirements.
+	Receives a list of strings that are arithmetic problems
+	and returns the problems arranged verticallz and side-by-side.
+	
+	Function takes optional second argument:
+	when true, answer to problem is calculated and displayed.
 	"""
 
 	# Valid problem length
