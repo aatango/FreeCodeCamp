@@ -1,0 +1,74 @@
+<!-- <!DOCTYPE html> -->
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="author" content="André Teixeira"/>
+        <meta name="description" content="A brief tribute page for Rhichard Feynman.
+        Made as a project for FreeCodeCamp.org Responsive Web Design Course"/>
+        <title>A tribute to Richard Feynman</title>
+        <!--style element included in HTML doc for project organisation-->
+        <style>
+            #flex-container {
+                display: flex;
+                height: 100%;
+                width: auto;
+		        justify-content:space-evenly;
+		        align-items: center;
+            }
+            #img-div {
+                display: flex;
+                flex-direction: column;
+		        height:541px;
+                max-height: 100%;
+		        width: 470px;
+                display: flex;
+                justify-content: center;
+		        align-items: center;
+            }
+            img {
+		        max-height: 100%;
+		        max-width: 100%;
+                align-content: center;
+	        }
+            #tribute-info {
+                text-align:center;
+                justify-content:space-evenly;
+            }
+            #quote {
+                font-size: 48;
+            }
+            #img-caption {
+                /*The code in this section is intended only to fulfill a test for this project,
+                and is not intended to be shown*/
+                font-size: 0;
+            }
+        </style>
+    </head>
+    <body id="main">
+        <main id="flex-container">
+            <figure id="img-div">
+                <img  id="image" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/RichardFeynman-PaineMansionWoods1984_copyrightTamikoThiel_bw.jpg" alt="Richard Feynman gesturing"/>
+                <!--the code below exists to fulfill a test for this project, 
+                and is not intended to be shown-->
+                <figcaption id="img-caption"><em>explaining a concept</em></figcaption>
+            </figure>
+            <div id="tribute-info">
+                <cite><strong id="quote">&#8220</strong> The first principle is that you must not fool yourself, and you are the easiest person to fool.</cite>
+                <br/>
+                <br/>
+                <br/>
+                <h1 id="title">Richard Phillips Feynman</h1>
+                <p><em>1918</em> - <em>1988</em></p>
+            </div>
+        </main>       
+    </body>
+    <footer style="font-size: 12px;">
+        <hr/>
+        <p>made by <strong>André Teixeira</strong></p>
+        <p>for <a href="https://www.freecodecamp.org/" alt="freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)">freeCodeCamp</a></p>
+        <cite>The content in this page is taken from Feynman's <a id="tribute-link" href="https://en.m.wikipedia.org/wiki/Richard_Feynman" target="_blank" alt="">Wikipedia page</a></cite>
+    </footer>
+</html>
+
+
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>

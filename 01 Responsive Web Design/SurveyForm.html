@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="author" content="André Teixeira"/>
+		<meta name="description" content="A survey form to prepare players for the game Lasers & Feelings"/>
+		<title>Lasers & Feelings Setup form</title>
+		<!--style element included in HTML doc for project organisation-->
+		<style>
+			html{
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+			}
+			#disclaimer {
+				text-align: center;
+				background-color: #04C4D9;
+				padding: 10px;
+			}
+			body {background-color: #0378A6; margin: auto;}
+			#form {
+				background-image: linear-gradient(#000, #012340);
+				color: #B0D1D9;
+				max-width: 700px;
+				padding: 11px;
+				margin: 10px auto;
+				border-radius: 5px;
+			}
+			img {
+				max-width: 100%;
+			}
+			h1 {text-align: center;}
+		</style>
+	</head>
+	<body>
+		<div id="disclaimer">
+			<h2><strong>THIS PAGE IS MEANT FOR EDUCATIONAL PURPOSES ONLY, AND WILL NOT ACTUALLY RETURN A FORM UPON SUBMITTAL</strong></h2>
+		</div>
+		<!--INCLUDE VERY CLEAR DISCLAIMER AT TOP OF PAGE
+			"THIS PAGE IS MEANT FOR EDUCATIONAL PURPOSES ONLY, AND WILL NOT GENERATE A CHARACTER SHEET"-->
+		<div id="form">
+			<header>
+				<img src="https://img.itch.zone/aW1nLzMzMDQ3OTcucG5n/original/RX6mnE.png"/>
+				<p id="description">YOU ARE THE CREW OF THE INTERSTELLAR SCOUT SHIP <strong><em>RAPTOR</em></strong>. Your   mission is to explore uncharted regions of space, deal with aliens both friendly and deadly,  and defend the Consortium worlds against space dangers. <strong>CAPTAIN DARCY</strong> has   been overcome by the strange psychic entity known as <em>Something Else</em>, leaving you to  fend for yourselves while he recovers in a medical pod.</p>
+				<hr/>
+			</header>
+			<form action="" id="survey-form">
+				<h1 id="title">Set-up form for Lasers & Feelings</h1>
+				<h2>1. Create the Ship</h2>
+				<div>
+					<h3>Pick two strengths for the <em>Raptor</em>:</h3>
+					<!--include JS code to ensure only separate options are selected b/w two Strengths-->
+					<select name="Strength_1">
+						<option value="Fast">Fast</option>
+						<option value="Nimble">Nimble</option>
+						<option value="Armed">Well-Armed</option>
+						<option value="Shields">Powerfull Shields</option>
+						<option value="Sensors">Superior Sensors</option>
+						<option value="Cloak">Cloaking Device</option>
+						<option value="Fighter">Fightercraft</option>
+					</select>
+					<select name="Strength_2">
+						<option value="Fast">Fast</option>
+ 						<option value="Nimble">Nimble</option>
+ 						<option value="Armed">Well-Armed</option>
+ 						<option value="Shields">Powerfull Shields</option>
+ 						<option value="Sensors">Superior Sensors</option>
+ 						<option value="Cloak">Cloaking Device</option>
+ 						<option value="Fighter">Fightercraft</option>
+					</select>
+ 				</div>
+ 				<div>
+					<h3>2. Choose a problem:</h3>
+					<div>
+ 						<input type="radio" name="Problem" value="FH"/>
+ 						<label for="FH"><strong>Fuel Hog</strong> (always needs energy crystals)</label>
+					</div>
+					<div>
+ 						<input type="radio" name="Problem" value="OP"/>
+
+						<label for="OP"><strong>Only One Medical Pod</strong> (and Cpt. Darcy is in it)</label>
+					</div>
+					<div>
+						<input type="radio" name="Problem" value="HCB"/>
+						<label for="HCB"><strong>Horrible Cirvuit Breakers</strong> (in battle, consoles tend   to explode on the bridge)</label>
+					</div>
+					<div>
+						<input type="radio" name="Problem" value="GR"/>
+						<label for="GB"><strong>Grim Reputation</strong> (Cpt. Darcy did some bad stuff in the  past)</label>
+					</div>
+				</div>
+				<h2>3. Create Character</h2>
+				<div>
+					<label for="name" id="name-label">Give your character a <strong>cool space adventure name</strong></label>
+					<input type="text" name="name" id="name" placeholder="Sgt. O'some" required/>
+ 				</div>
+ 				<div>
+					<label for="Role">Choose a role for your character:</label>
+					<select name="Role" id="dropdown">
+						<option value="Doctor">Doctor</option>
+						<option value="Envoy">Envoy</option>
+						<option value="Engineer">Engineer</option>
+						<option value="Explorer">Explorer</option>
+						<option value="Pilot">Pilot</option>
+						<option value="Scientist">Scientist</option>
+						<option value="Soldier">Soldier</option>
+					</select>
+				</div>
+				<div>
+					<label for="Style">Choose a style for your character</label>
+					<select name="Style">
+						<option value="Alien">Alien</option>
+						<option value="Android">Android</option>
+						<option value="Dangerous">Dangerous</option>
+						<option value="Heroic">Heroic</option>
+						<option value="Hot-Shot">Hot-Shot</option>
+						<option value="Intrepid">Intrepid</option>
+						<option value="Savvy">Savvy</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label id="number-label" for="number">Choose your number</label>
+					<input type="number" name="base-number" id="number" min="2" max="5" class="form-control" placeholder="#"/>
+				</div>
+				<div>
+					<h3>You have:</h3>
+					<div>
+						<input type="checkbox" name="Uniform" value="uni" checked/>
+						<label for="uniform">Consortium uniform (with built-in vacc-suit for space walks)</label>
+					</div>
+					<div>
+						<input type="checkbox" name="camera" value="cam" checked/>
+						<label for="camera">Super-sweet space-phone-camera-communicator-scanner thing (with universal translator)</label>
+					</div>
+					<div>
+						<input type="checkbox" name="pistol" value="pistol" checked/>
+						<label for="pistol">variable-beam phase pisto (set to stun, usually)</label>
+					</div>
+					<div>
+						<h3>Choose a goal, or create your own</h3>
+						<select name="Goal">
+							<option value="Cpt">Become Captain</option>
+							<option value="Aliens">Meet New Aliens</option>
+							<option value="Shoot">Shoot Bad Guys</option>
+							<option value="Worlds">Find New Worlds</option>
+							<option value="Mysteries">Solve Weird Space Mysteries</option>
+							<option value="Prove">Prove Yourself</option>
+							<option value="Awesome">Keep Being Awesome (you have nothing to prove)</option>
+							<option value="Other">Other (write your own below)</option>
+						</select>
+						<div>
+							<input type="text" placeholder="Type your own custom goal!"/>
+						</div>
+					</div>
+				</div>
+				<div>
+					<br/>
+					<label for="description">Write a small description of your character</label>
+					<br/>
+					<textarea name="description" rows="5" cols="40">Character description</textarea>
+				</div>
+				<div>
+					<label for="email" id="email-label">email to send filled form</label>
+					<input type="email" name="email" id="email" placeholder="mail@mail.domain" class="form-control" required/>
+				</div>
+				<div>
+					<input type="submit" value="Send Request" id="submit"/>
+				</div>
+			</form>
+		</main>
+	</body>
+	<footer style="font-size: 12px;">
+		<hr/>
+		<cite><strong> LASERS & FEELINGS: THE DOUBLECLICKS TRIBUTE RPG</strong> (v1.3) is by <a href="http://onesevendesign.com/" target="_blank" alt="John Harper's webpage">John Harper</a></cite>
+		<p>This character creator survey made by <strong>André Teixeira</strong> for <a href="https://www.freecodecamp.org/" alt="freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)">freeCodeCamp</a></p>
+	</footer>
+</html>
+
+
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
