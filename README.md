@@ -1,10 +1,15 @@
-# JavaScript Algorithms and Data Structures
+## Responsive Web Design
+[FCC link](https://www.freecodecamp.org/learn/responsive-web-design/)
+
+Unfinished certification.
+
+## JavaScript Algorithms and Data Structures
 [FCC link](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/)
 
 Course projects done through FCC webpage. The files in this branch serve as backup.
 
 
-# Data Visualisation
+## Data Visualisation
 [FCC link](https://www.freecodecamp.org/learn/data-visualization/)
 
 ### Design decisions
@@ -35,11 +40,11 @@ d3.select('svg')
 	.on('mouseout', () => tooltip.style('visibility', 'hidden'));
 ```
 
-# Scientific Computing with Python
+## Scientific Computing with Python
 [FCC link](https://www.freecodecamp.org/learn/scientific-computing-with-python/)
 
 Course projects done through Replit.com, as requested in the course page. The files in this branch serve as a backup.
 
-# Coding Interview Prep
+## Coding Interview Prep
 [FCC link](https://www.freecodecamp.org/learn/coding-interview-prep/)
 
